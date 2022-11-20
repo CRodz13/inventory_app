@@ -51,7 +51,7 @@ class LoginView(ModelViewSet):
 
         user = authenticate(
             username=valid_request.validated_data["email"],
-            password=valid_request.validated_data("password", None),
+            password=valid_request.validated_data.get("password", None),
         )
 
         if not user:
@@ -60,7 +60,7 @@ class LoginView(ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
-        access = get_access_token({"user_id", user.id}, 1)
+        access = get_access_token({"user_id": user.id}, 1)
         
         user.last_login = datetime.now()
         user.save()

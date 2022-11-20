@@ -9,4 +9,5 @@ def get_access_token(payload, expiry):
         settings.SECRET_KEY,
         algorithm="HS256"
     )
+    return token
 
